@@ -1,4 +1,4 @@
-===== FILE: package.json =====
+
 {
   "name": "streamnest-frontend",
   "version": "1.0.0",
@@ -86,8 +86,3 @@ export default function App() {
     </div>
   )
 }
-
-===== FILE: src/index.css =====
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
