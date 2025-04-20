@@ -1,8 +1,7 @@
-import { db } from './firebase';
+import { db, app } from './firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { app } from "./firebase";
 
 const auth = getAuth(app);
 
