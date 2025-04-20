@@ -1,3 +1,4 @@
+import ProtectedRoute from "./ProtectedRoute";
 import Dashboard from "./Dashboard";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Home";
@@ -10,7 +11,14 @@ export default function AppRouter() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route 
+  path="/dashboard" 
+  element={
+    <ProtectedRoute>
+      <Dashboard />
+    </ProtectedRoute>
+  } 
+/>
         <Route path="/about" element={<About />} />
       </Routes>
     </Router>
