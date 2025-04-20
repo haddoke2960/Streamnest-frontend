@@ -21,9 +21,13 @@ export default function AuthForm() {
       } else {
         await createUserWithEmailAndPassword(auth, email, password);
       }
+      
       // Store user in Firestore
-await setDoc(doc(db, "users", email), {
-  email,
+const userCred = await createUserWithEmailAndPassword(auth, email, password);
+const user = userCred.user;
+
+await setDoc(doc(db, "users", user.uid), {
+  email: user.email,
   createdAt: new Date(),
 });
     } catch (err) {
