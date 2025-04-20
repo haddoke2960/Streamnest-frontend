@@ -1,6 +1,7 @@
+import { getFirestore } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-
+const db = getFirestore(app);
 const firebaseConfig = {
   apiKey: "AIzaSyCqez8nv1WvD8X...your_key...",
   authDomain: "streamnest-5c9b6.firebaseapp.com",
@@ -15,3 +16,4 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 export { app, analytics };
+export { app, analytics, db };
