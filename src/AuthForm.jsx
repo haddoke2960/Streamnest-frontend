@@ -18,14 +18,15 @@ export default function AuthForm() {
     try {
       if (isLogin) {
         await signInWithEmailAndPassword(auth, email, password);
-      } else {
-        await createUserWithEmailAndPassword(auth, email, password);
-      }
-      
-      // Store user in Firestore
-const userCred = await createUserWithEmailAndPassword(auth, email, password);
+      } else 
+      const userCred = await createUserWithEmailAndPassword(auth, email, password);
 const user = userCred.user;
 
+await setDoc(doc(db, "users", user.uid), {
+  email: user.email,
+  createdAt: new Date(),
+});
+    
 await setDoc(doc(db, "users", user.uid), {
   email: user.email,
   createdAt: new Date(),
