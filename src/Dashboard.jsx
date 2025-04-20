@@ -1,3 +1,6 @@
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "./firebase";
+import { useEffect, useState } from "react";
 import { useAuth } from "./AuthContext";
 import { getAuth, signOut } from "firebase/auth";
 import { app } from "./firebase";
@@ -6,7 +9,22 @@ const auth = getAuth(app);
 
 export default function Dashboard() {
   const { user } = useAuth();
+const [userData, setUserData] = useState(null);
 
+useEffect(() => {
+  if (!user) return;
+
+  const fetchData = async () => {
+    const docRef = doc(db, "users", user.email);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      setUserData(docSnap.data());
+    }
+  };
+
+  fetchData();
+}, [user]);
   const handleLogout = async () => {
     await signOut(auth);
   };
@@ -17,7 +35,10 @@ export default function Dashboard() {
       {user ? (
         <>
           <p className="mb-4 text-lg">Welcome, <strong>{user.email}</strong></p>
-          <button
+         <p className="text-sm text-gray-500">
+  Registered: {userData?.createdAt?.toDate().toLocaleString()}
+</p>
+           <button
             onClick={handleLogout}
             className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
           >
