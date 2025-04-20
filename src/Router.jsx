@@ -10,6 +10,7 @@ export default function AppRouter() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/about" element={<About />} />
       </Routes>
     </Router>
