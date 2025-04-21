@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from './firebase'; // adjust the path to where your Firebase config is
+import { auth } from './firebase'; // Adjust the path as needed
 
 const AuthForm = () => {
   const [email, setEmail] = useState('');
@@ -13,7 +13,7 @@ const AuthForm = () => {
 
     try {
       const userCred = await createUserWithEmailAndPassword(auth, email, password);
-      console.log('User created:', userCred.user);
+      console.log('User created:', userCred);
     } catch (err) {
       setError(err.message);
     }
