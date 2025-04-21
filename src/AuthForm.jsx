@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from './firebase'; // Adjust the path as needed
+import { auth } from './firebase';  // Make sure this file exports "auth"
 
 const AuthForm = () => {
   const [email, setEmail] = useState('');
@@ -13,7 +13,7 @@ const AuthForm = () => {
 
     try {
       const userCred = await createUserWithEmailAndPassword(auth, email, password);
-      console.log('User created:', userCred);
+      console.log('User created:', userCred.user);
     } catch (err) {
       setError(err.message);
     }
