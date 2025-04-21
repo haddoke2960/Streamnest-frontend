@@ -34,7 +34,9 @@ useEffect(() => {
       <h2 className="text-2xl font-bold mb-2">Dashboard</h2>
       {user ? (
         <>
-          <p className="mb-4 text-lg">Welcome, <strong>{user.email}</strong></p>
+          <p className="mb-4 text-lg">
+  Welcome, {userData?.fullName || "User"}
+</p>
          <p className="text-sm text-gray-500">
   Registered: {userData?.createdAt?.toDate().toLocaleString()}
 </p>
