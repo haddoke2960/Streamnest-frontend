@@ -1,34 +1,28 @@
-import React, { useState } from "react";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { app } from "./firebase";
+import React, { useState } from 'react';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from './firebase'; // adjust the path to where your Firebase config is
 
-const auth = getAuth(app);
+const AuthForm = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-export default function AuthForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isRegistering, setIsRegistering] = useState(true);
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
 
-  try {
-    let userCred;
-
-    if (isRegistering) {
-      userCred = await createUserWithEmailAndPassword(auth, email, password);
-      console.log("User registered:", userCred.user);
-    } else {
-      userCred = await signInWithEmailAndPassword(auth, email, password);
-      console.log("User logged in:", userCred.user);
+    try {
+      const userCred = await createUserWithEmailAndPassword(auth, email, password);
+      console.log('User created:', userCred.user);
+    } catch (err) {
+      setError(err.message);
     }
-  } catch (error) {
-    console.error("Auth error:", error);
-  }
-};
+  };
 
   return (
     <div>
-      <h2>{isRegistering ? "Register" : "Login"}</h2>
+      <h2>Sign Up</h2>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <input
           type="email"
@@ -37,7 +31,6 @@ const handleSubmit = async (e) => {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-        <br />
         <input
           type="password"
           placeholder="Password"
@@ -45,14 +38,10 @@ const handleSubmit = async (e) => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <br />
-        <button type="submit">
-          {isRegistering ? "Create Account" : "Login"}
-        </button>
+        <button type="submit">Sign Up</button>
       </form>
-      <p onClick={() => setIsRegistering(!isRegistering)} style={{ cursor: "pointer" }}>
-        {isRegistering ? "Already have an account? Login here" : "Don't have an account? Register here"}
-      </p>
     </div>
   );
-}
+};
+
+export default AuthForm;
