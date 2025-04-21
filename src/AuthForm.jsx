@@ -8,22 +8,23 @@ export default function AuthForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isRegistering, setIsRegistering] = useState(true);
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      let userCred;
-      if (isRegistering) {
-        userCred = await createUserWithEmailAndPassword(auth, email, password);
-        console.log("User registered:", userCred.user);
-      } else {
-        userCred = await signInWithEmailAndPassword(auth, email, password);
-        console.log("User logged in:", userCred.user);
-      }
-    } catch (error) {
-      console.error("Auth error:", error);
+  try {
+    let userCred;
+
+    if (isRegistering) {
+      userCred = await createUserWithEmailAndPassword(auth, email, password);
+      console.log("User registered:", userCred.user);
+    } else {
+      userCred = await signInWithEmailAndPassword(auth, email, password);
+      console.log("User logged in:", userCred.user);
     }
-  };
+  } catch (error) {
+    console.error("Auth error:", error);
+  }
+};
 
   return (
     <div>
