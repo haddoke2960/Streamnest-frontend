@@ -1,5 +1,24 @@
-import AppRouter from "./Router";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AuthForm from "./AuthForm";
+import Dashboard from "./Dashboard";
+import PrivateRoute from "./PrivateRoute";
 
-export default function App() {
-  return <AppRouter />;
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<AuthForm />} />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+      </Routes>
+    </Router>
+  );
 }
+
+export default App;
