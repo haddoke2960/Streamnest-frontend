@@ -21,13 +21,8 @@ const [fullName, setFullName] = useState("");
       } else 
       const userCred = await createUserWithEmailAndPassword(auth, email, password);
 const user = userCred.user;
-await setDoc(doc(db, "users", user.uid), {
-  fullName,
-  email: user.email,
-  createdAt: new Date(),
-});
-    
-await setDoc(doc(db, "users", user.uid), {
+
+    await setDoc(doc(db, "users", user.uid), {
   email: user.email,
   createdAt: new Date(),
 });
