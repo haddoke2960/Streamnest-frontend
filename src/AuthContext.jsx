@@ -1,21 +1,27 @@
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";  // Make sure this import is complete
+import { createContext, useContext, useEffect, useState } from 'react';
+import { auth } from './firebase';
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCqez8nv1WvD8X...your_key",  // Replace with your actual API key
-  authDomain: "streamnest-5c9b6.firebaseapp.com",  // Add ".com"
-  projectId: "streamnest-5c9b6",
-  storageBucket: "streamnest-5c9b6.appspot.com",  // Add ".com"
-  messagingSenderId: "888388746012",
-  appId: "1:888388746012:web:5bb2f428237...your_app_id",  // Complete the ID
-  measurementId: "G-8YPBW8F9LD"
-};
+const AuthContext = createContext();
 
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const db = getFirestore(app);
-const auth = getAuth(app);  // Correctly initialized
+export function AuthProvider({ children }) {
+  const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-export { app, analytics, db, auth };  // Only export what you need
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      setCurrentUser(user);
+      setLoading(false);
+    });
+    return unsubscribe;
+  }, []);
+
+  return (
+    <AuthContext.Provider value={{ currentUser }}>
+      {!loading && children}
+    </AuthContext.Provider>
+  );
+}
+
+export function useAuth() {
+  return useContext(AuthContext);
+}
