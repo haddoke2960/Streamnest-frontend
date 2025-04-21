@@ -7,6 +7,7 @@ export default defineConfig({
     outDir: 'dist',
   },
   server: {
-    port: 5173
-  }
+    host: '0.0.0.0', // This allows access from local devices like your iPhone
+    port: 5173,
+  },
 })
