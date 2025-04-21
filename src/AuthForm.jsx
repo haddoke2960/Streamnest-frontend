@@ -10,20 +10,21 @@ export default function AuthForm() {
   const [isRegistering, setIsRegistering] = useState(false);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      if (isRegistering) {
-        const userCred = await createUserWithEmailAndPassword(auth, email, password);
-        console.log("User registered:", userCred.user);
-      } else {
-        const userCred = await signInWithEmailAndPassword(auth, email, password);
-        console.log("User logged in:", userCred.user);
-      }
-    } catch (error) {
-      console.error("Auth error:", error.message);
+  try {
+    let userCred;
+    if (isRegistering) {
+      userCred = await createUserWithEmailAndPassword(auth, email, password);
+      console.log("User registered:", userCred.user);
+    } else {
+      userCred = await signInWithEmailAndPassword(auth, email, password);
+      console.log("User logged in:", userCred.user);
     }
-  };
+  } catch (error) {
+    console.error("Auth error:", error.message);
+  }
+};
 
   return (
     <div>
