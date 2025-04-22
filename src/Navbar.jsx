@@ -1,14 +1,20 @@
-import { Link } from "react-router-dom";
+// Navbar.jsx
+import { Link } from 'react-router-dom'; // <– Add this
+import { useAuth } from './AuthContext';
 
-export default function Navbar() {
+const Navbar = () => {
+  const { currentUser, isAuthenticated } = useAuth();
+
   return (
-    <nav className="w-full bg-gray-900 text-white px-6 py-4 flex justify-between items-center">
-      <h1 className="text-xl font-bold">StreamNest</h1>
-      <div className="space-x-4">
-        <Link to="/" className="hover:underline">Home</Link>
-        <Link to="/about" className="hover:underline">About</Link>
-        <Link to="/dashboard" className="hover:underline">Dashboard</Link>
-      </div>
+    <nav>
+      <Link to="/">Home</Link> {/* Use Link for navigation */}
+      {isAuthenticated ? (
+        <span>Welcome, {currentUser?.email}</span>
+      ) : (
+        <Link to="/login">Sign In</Link> // Replace <a> with <Link>
+      )}
     </nav>
   );
-}
+};
+
+export default Navbar;
