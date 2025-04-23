@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import app from './firebase';
 
 const AuthForm = () => {
   const [email, setEmail] = useState('');
@@ -13,7 +14,7 @@ const AuthForm = () => {
     setSuccess('');
 
     try {
-      const auth = getAuth();
+      const auth = getAuth(app);
       const userCred = await createUserWithEmailAndPassword(auth, email, password);
       setSuccess(`User created: ${userCred.user.email}`);
     } catch (err) {
@@ -43,7 +44,9 @@ const AuthForm = () => {
             required
           />
         </div>
-        <button type="submit" style={{ marginTop: '15px' }}>Sign Up</button>
+        <button type="submit" style={{ marginTop: '15px' }}>
+          Sign Up
+        </button>
       </form>
       {error && <p style={{ color: 'red' }}>Error: {error}</p>}
       {success && <p style={{ color: 'green' }}>{success}</p>}
