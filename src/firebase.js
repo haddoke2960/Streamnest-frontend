@@ -2,12 +2,13 @@
 import { initializeApp } from 'firebase/app';
 
 const firebaseConfig = {
-  apiKey: 'YOUR_API_KEY',
-  authDomain: 'YOUR_AUTH_DOMAIN',
-  projectId: 'YOUR_PROJECT_ID',
-  storageBucket: 'YOUR_STORAGE_BUCKET',
-  messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
-  appId: 'YOUR_APP_ID'
+  apiKey: "AIzaSyCqez8nv1WvD8XXn3cEzZTtWo5tQOIKSBI",
+  authDomain: "streamnest-5c9b6.firebaseapp.com",
+  projectId: "streamnest-5c9b6",
+  storageBucket: "streamnest-5c9b6.appspot.com",
+  messagingSenderId: "888388746012",
+  appId: "1:888388746012:web:5bccfdb47a5702ee5c3c7e",
+  measurementId: "G-ZK1YN8QZD5"
 };
 
 const app = initializeApp(firebaseConfig);
