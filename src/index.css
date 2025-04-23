@@ -1,16 +1,16 @@
-body {
-  font-family: sans-serif;
-  background-color: #f5f5f5;
-  display: flex;
-  justify-content: center;
-  padding: 2rem;
-}
+/* index.css */
 
+/* Tailwind base styles (required) */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles for auth form */
 .auth-form {
   background: #fff;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   width: 300px;
 }
 
